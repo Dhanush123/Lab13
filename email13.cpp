@@ -35,12 +35,13 @@ int main(){
 	cout << "Enter output filename [default: " << defaultOutputFile << "]: ";
 	getline(cin,outputFile);
 	if(outputFile==""){
-			inputFile = defaultOutputFile;
+			outputFile = defaultOutputFile;
 	}
 
 	const int MAX_EMAILS = 1000;
 	int nEmails = 0;
 	string name[MAX_EMAILS];
+
 	fin.open(inputFile.c_str());
     while(fin.good()){
     string line;
@@ -48,7 +49,7 @@ int main(){
 	for (int i = 0; i < line.length(); i++){
 		if(line[i]=='@'){
 
-			int s = i -1;
+			int s = i - 1;
 			int e = i + 1;
 			bool hasDot = false;
 
@@ -61,7 +62,7 @@ int main(){
 				 }
 				 s--;
 			}
-
+			   s++;
 			while(true){
 				 if(e >= line.length()){
 					 break;
@@ -78,13 +79,12 @@ int main(){
 			if(nEmails < MAX_EMAILS){
 				name[nEmails++] = line.substr(s,e-s);
 			}
-
-			for(int z = 0; z < nEmails; z++){
-				cout << name[z] << endl;
-			}
 		}
 	}
    }
+    for(int z = 0; z < nEmails; z++){
+    					cout << name[z] << endl;
+    				}
     fin.close();
 
 
